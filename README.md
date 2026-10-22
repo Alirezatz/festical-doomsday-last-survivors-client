@@ -222,30 +222,6 @@ That means:
 
 ---
 
-## Telegram group
-
-Questions, setup help, release news and updates:
-
-### 👉 https://t.me/DoomsdayFTGroup
-
-The same link is built into the client — the **Community** section in the footer of the window opens it in your browser.
-
----
-
-## Donate
-
-This client is free, open source and maintained in the community's free time. If it saves you time, you can support the project:
-
-| Network | Address |
-| --- | --- |
-| **USDT (TRC20)** | `TYVUbUzjy6wkmqArA9fsFwz4qhRbJNErws` |
-| **BTC** | `bc1q4q93d288fsh8ukp5v6ekrcytz3jwlmcvvv3f7n` |
-| **Ethereum (ERC20)** | `0x4860Caf80CD15e17624A63eE169332EA7306FEeb` |
-
-Every donation goes towards the project's running costs and the time spent on maintenance. Thank you for your support. 🙏
-
----
-
 ## Build from source
 
 You need the **.NET 10 SDK**.
@@ -380,7 +356,7 @@ The edge server for your current network may be unreachable. The client already 
 
 This project is an **independent, unofficial, community-made client**. It is not affiliated with, endorsed by, sponsored by, or connected to IGG or any of its studios or partners. It is not an official product and it is not supported by the game's developers.
 
-This client talks to the game's own servers using the protocol the game already uses on your own device. It does not contain any game assets, and it does not provide resource gathering, map scanning or automated farming. Using it is at your own risk, and you are responsible for complying with the game's terms of service and with the laws that apply to you.
+This client talks to the game's own servers using the protocol the game already uses on your own device. Using it is at your own risk, and you are responsible for complying with the game's terms of service and with the laws that apply to you.
 
 ## Terms of use
 
@@ -391,6 +367,29 @@ This client talks to the game's own servers using the protocol the game already 
 - Do not use this client for anything that violates the game's terms of service, any third party's rights, or any applicable law.
 - The game and its assets belong to their respective owners. This project claims no ownership over them.
 - Contributions, bug reports and pull requests are welcome.
+
+---
+
+
+## Telegram group
+
+Questions, setup help, release news and updates:
+
+### 👉 https://t.me/DoomsdayFTGroup
+
+The same link is built into the client — the **Community** section in the footer of the window opens it in your browser.
+
+---
+
+## Donate
+
+This client is free, open source and maintained in the community's free time. If it saves you time, you can support the project:
+
+| Network | Address |
+| --- | --- |
+| **USDT (TRC20)** | `TYVUbUzjy6wkmqArA9fsFwz4qhRbJNErws` |
+| **BTC** | `bc1q4q93d288fsh8ukp5v6ekrcytz3jwlmcvvv3f7n` |
+| **Ethereum (ERC20)** | `0x4860Caf80CD15e17624A63eE169332EA7306FEeb` |
 
 ---
 
