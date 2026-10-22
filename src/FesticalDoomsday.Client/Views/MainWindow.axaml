@@ -1,0 +1,420 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:models="clr-namespace:FesticalDoomsday.Client.Models;assembly=FesticalDoomsdayClient"
+        xmlns:loc="clr-namespace:FesticalDoomsday.Client.Services;assembly=FesticalDoomsdayClient"
+        xmlns:views="clr-namespace:FesticalDoomsday.Client.Views;assembly=FesticalDoomsdayClient"
+        x:Class="FesticalDoomsday.Client.Views.MainWindow"
+        x:DataType="views:MainWindow"
+        Title="Festical Doomsday Last Survivors Client"
+        Width="1220" Height="940"
+        MinWidth="980" MinHeight="700"
+        Background="{StaticResource WindowBackgroundBrush}"
+        Foreground="{StaticResource InkBrush}"
+        FontFamily="Inter"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" MinHeight="150" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="190" MinHeight="100" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- ===== header ===== -->
+        <Grid Grid.Row="0" Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Width="42" Height="42" CornerRadius="12"
+                    ClipToBounds="True" BorderThickness="1"
+                    BorderBrush="{StaticResource LineStrongBrush}">
+                <Image Source="avares://FesticalDoomsdayClient/Assets/ICON.ico"
+                       Stretch="UniformToFill" />
+            </Border>
+
+            <StackPanel Grid.Column="1" Margin="14,0,18,0" VerticalAlignment="Center"
+                        ClipToBounds="True">
+                <TextBlock Classes="brand" Text="{loc:Loc Key=Brand}" />
+                <TextBlock x:Name="HeaderTitle" Classes="title" Text="{loc:Loc Key=HeaderTitle}"
+                           Margin="0,3,0,2" />
+                <TextBlock Classes="subtitle" Text="{loc:Loc Key=HeaderSubtitle}"
+                           TextTrimming="CharacterEllipsis" MaxLines="1" />
+            </StackPanel>
+
+            <Border Grid.Column="2" Background="{StaticResource SurfaceBrush}"
+                    BorderBrush="{StaticResource LineBrush}" BorderThickness="1"
+                    CornerRadius="10" Padding="3" VerticalAlignment="Center"
+                    ToolTip.Tip="{loc:Loc Key=LanguageTip}">
+                <StackPanel Orientation="Horizontal" Spacing="2">
+                    <Button x:Name="EnglishButton" Classes="language" Content="{loc:Loc Key=LanguageEnglish}"
+                            Click="English_Click" />
+                    <Button x:Name="PersianButton" Classes="language" Content="{loc:Loc Key=LanguagePersian}"
+                            Click="Persian_Click" />
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="3" Background="{StaticResource CardGradientBrush}"
+                    BorderBrush="{StaticResource LineBrush}" BorderThickness="1"
+                    CornerRadius="10" Padding="13,9" Margin="10,0,0,0" VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal" Spacing="9">
+                    <Border x:Name="ConnectionDot" Width="8" Height="8" CornerRadius="4"
+                            Background="#39473F" VerticalAlignment="Center" />
+                    <TextBlock x:Name="ConnectionLabel" Text="—" Foreground="{StaticResource InkBrush}"
+                               FontWeight="SemiBold" FontSize="11.5" VerticalAlignment="Center" />
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="4" Background="{StaticResource CardGradientBrush}"
+                    BorderBrush="{StaticResource LineBrush}" BorderThickness="1"
+                    CornerRadius="10" Padding="13,9" Margin="10,0,0,0" VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <TextBlock Text="{loc:Loc Key=RamLabel}" Classes="label" VerticalAlignment="Center" />
+                    <TextBlock x:Name="MemoryValue" Text="—" Foreground="{StaticResource InkBrush}"
+                               FontSize="11.5" FontWeight="Bold" VerticalAlignment="Center"
+                               FlowDirection="LeftToRight" />
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- ===== control panel ===== -->
+        <Border Grid.Row="1" Background="{StaticResource CardGradientBrush}"
+                BorderBrush="{StaticResource LineBrush}" BorderThickness="1"
+                CornerRadius="14" Padding="18,16">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="22" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="22" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- connection -->
+                    <StackPanel Grid.Column="0">
+                        <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,0,0,9">
+                            <Border Width="3" Height="12" CornerRadius="2"
+                                    Background="{StaticResource AccentBrush}" VerticalAlignment="Center" />
+                            <TextBlock Classes="groupTitle" Text="{loc:Loc Key=ConnectionGroup}" />
+                        </StackPanel>
+                        <TextBlock Classes="label" Text="{loc:Loc Key=ConnectionHint}" Margin="0,0,0,6" />
+                        <Border Background="{StaticResource FieldBrush}"
+                                BorderBrush="{StaticResource LineBrush}" BorderThickness="1"
+                                CornerRadius="8" Padding="11,0" Height="36">
+                            <TextBlock x:Name="ConnectionSummary" Text="—"
+                                       Foreground="{StaticResource MutedStrongBrush}" FontSize="11.5"
+                                       VerticalAlignment="Center" TextTrimming="CharacterEllipsis" />
+                        </Border>
+                        <Grid ColumnDefinitions="*,8,*" Margin="0,10,0,0">
+                            <Button x:Name="ConnectButton" Grid.Column="0" HorizontalAlignment="Stretch"
+                                    Click="Connect_Click" />
+                            <Button x:Name="DisconnectAll" Grid.Column="2" HorizontalAlignment="Stretch"
+                                    Classes="danger" Click="DisconnectAll_Click" />
+                        </Grid>
+                    </StackPanel>
+
+                    <!-- alliance -->
+                    <StackPanel Grid.Column="2">
+                        <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,0,0,9">
+                            <Border Width="3" Height="12" CornerRadius="2"
+                                    Background="{StaticResource AccentBrush}" VerticalAlignment="Center" />
+                            <TextBlock Classes="groupTitle" Text="{loc:Loc Key=AllianceGroup}" />
+                        </StackPanel>
+                        <TextBlock Classes="label" Text="{loc:Loc Key=AllianceIdLabel}" Margin="0,0,0,6" />
+                        <TextBox x:Name="AllianceNameTextBox" VerticalContentAlignment="Center"
+                                 Watermark="_CC"
+                                 ToolTip.Tip="{loc:Loc Key=AllianceIdTip}"
+                                 TextChanged="AllianceName_TextChanged" />
+                        <Grid ColumnDefinitions="*,8,*" Margin="0,10,0,0">
+                            <Button x:Name="JoinAlliance" Grid.Column="0" HorizontalAlignment="Stretch"
+                                    Content="{loc:Loc Key=JoinAlliance}" Click="JoinAlliance_Click"
+                                    ToolTip.Tip="{loc:Loc Key=JoinAllianceTip}" />
+                            <Button x:Name="LeaveAlliance" Grid.Column="2" HorizontalAlignment="Stretch"
+                                    Classes="danger" Content="{loc:Loc Key=LeaveAlliance}"
+                                    Click="LeaveAlliance_Click"
+                                    ToolTip.Tip="{loc:Loc Key=LeaveAllianceTip}" />
+                        </Grid>
+                    </StackPanel>
+
+                    <!-- server -->
+                    <StackPanel Grid.Column="4">
+                        <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,0,0,9">
+                            <Border Width="3" Height="12" CornerRadius="2"
+                                    Background="{StaticResource AccentBrush}" VerticalAlignment="Center" />
+                            <TextBlock Classes="groupTitle" Text="{loc:Loc Key=ServerGroup}" />
+                        </StackPanel>
+                        <TextBlock Classes="label" Text="{loc:Loc Key=CustomServerLabel}" Margin="0,0,0,6" />
+                        <TextBox x:Name="CustomServerHostTextBox" VerticalContentAlignment="Center"
+                                 Watermark="example.com"
+                                 ToolTip.Tip="{loc:Loc Key=CustomServerTip}"
+                                 TextChanged="CustomServerHost_TextChanged" />
+                        <Button x:Name="CustomServerButton" HorizontalAlignment="Stretch" Margin="0,10,0,0"
+                                Click="CustomServer_Click" ToolTip.Tip="{loc:Loc Key=UseCustomServerTip}" />
+                    </StackPanel>
+                </Grid>
+
+                <Border Grid.Row="1" Height="1" Background="{StaticResource AccentRuleBrush}"
+                        Margin="0,14,0,0" />
+
+                <Grid Grid.Row="2" Margin="0,12,0,0" ColumnDefinitions="Auto,*">
+                    <Border x:Name="StatusDot" Width="6" Height="6" CornerRadius="3"
+                            Background="{StaticResource MutedBrush}" VerticalAlignment="Top"
+                            Margin="0,5,0,0" />
+                    <TextBlock x:Name="StatusLine" Grid.Column="1" Classes="caption"
+                               TextWrapping="Wrap" Margin="9,0,0,0" />
+                </Grid>
+            </Grid>
+        </Border>
+
+        <!-- ===== accounts ===== -->
+        <Grid Grid.Row="2" Margin="0,16,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Margin="0,0,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Classes="sectionTitle" Text="{loc:Loc Key=AccountsTitle}" VerticalAlignment="Center" />
+                <TextBlock x:Name="AccountsSummary" Grid.Column="1" Classes="caption" Margin="12,1,0,0"
+                           TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+                <Button Grid.Column="2" x:Name="BuildCaptureButton" Classes="secondary"
+                        Content="{loc:Loc Key=BuildCapture}"
+                        Margin="0,0,8,0" Click="BuildCapture_Click"
+                        ToolTip.Tip="{loc:Loc Key=BuildCaptureTip}" />
+                <Button Grid.Column="3" Content="{loc:Loc Key=ImportAccounts}"
+                        Click="ImportAccount_Click" ToolTip.Tip="{loc:Loc Key=ImportAccountsTip}" />
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <ItemsControl x:Name="AccountCards">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="models:AccountSession">
+                                <Border Width="252" Padding="13" CornerRadius="13" Margin="0,0,12,12"
+                                        Classes="accountCard"
+                                        Classes.connected="{Binding IsConnected}"
+                                        Classes.connecting="{Binding IsConnecting}">
+                                    <StackPanel Spacing="9">
+                                        <Grid ColumnDefinitions="Auto,*,Auto">
+                                            <Border Classes="statusDot"
+                                                    Classes.connected="{Binding IsConnected}"
+                                                    Classes.connecting="{Binding IsConnecting}" />
+                                            <TextBlock Grid.Column="1" Text="{Binding Name}" FontSize="13"
+                                                       FontWeight="Bold" Foreground="{StaticResource InkBrush}"
+                                                       Margin="9,0,8,0" TextTrimming="CharacterEllipsis"
+                                                       VerticalAlignment="Center" />
+                                            <Button Grid.Column="2" Tag="{Binding}" Classes="ghost"
+                                                    Content="✕" Width="24" Height="24" Padding="0"
+                                                    FontSize="11" Margin="2,0,0,0"
+                                                    AutomationProperties.Name="{loc:Loc Key=RemoveAccount}"
+                                                    ToolTip.Tip="{loc:Loc Key=RemoveAccountTip}"
+                                                    Click="RemoveAccount_Click" />
+                                        </Grid>
+                                        <Grid ColumnDefinitions="Auto,*">
+                                            <Border Classes="chip"
+                                                    Classes.connected="{Binding IsConnected}"
+                                                    Classes.connecting="{Binding IsConnecting}">
+                                                <TextBlock Text="{Binding StatusText}" />
+                                            </Border>
+                                            <TextBlock Grid.Column="1" Text="{Binding CaptureFileName}"
+                                                       FontSize="10.5" Margin="8,0,0,0"
+                                                       Foreground="{StaticResource MutedBrush}"
+                                                       TextTrimming="CharacterEllipsis"
+                                                       VerticalAlignment="Center" />
+                                        </Grid>
+                                        <Button Tag="{Binding}" HorizontalAlignment="Stretch"
+                                                Classes="connectButton"
+                                                Classes.connected="{Binding IsConnected}"
+                                                Classes.connecting="{Binding IsConnecting}"
+                                                Content="{Binding ActionText}"
+                                                Click="AccountConnection_Click" />
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+
+                <ScrollViewer x:Name="EmptyAccountsHint" IsVisible="False"
+                              VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled">
+                    <Border MaxWidth="560" Background="#0B1411"
+                            BorderBrush="{StaticResource LineBrush}"
+                            BorderThickness="1" CornerRadius="14" Padding="26,22"
+                            HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <StackPanel HorizontalAlignment="Center">
+                            <Border Width="44" Height="44" CornerRadius="13"
+                                    Background="{StaticResource AccentLightBrush}"
+                                    HorizontalAlignment="Center">
+                                <TextBlock Text="+" FontSize="20" FontWeight="Bold"
+                                           Foreground="{StaticResource AccentLightTextBrush}"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                            <TextBlock Classes="sectionTitle" FontSize="14"
+                                       Text="{loc:Loc Key=EmptyAccountsTitle}"
+                                       HorizontalAlignment="Center" Margin="0,14,0,0" />
+                            <TextBlock Classes="caption" Text="{loc:Loc Key=EmptyAccountsDescription}"
+                                       HorizontalAlignment="Center" TextAlignment="Center"
+                                       TextWrapping="Wrap" MaxWidth="440" Margin="0,7,0,0" />
+                            <TextBlock Classes="caption" Text="{loc:Loc Key=EmptyAccountsHint}"
+                                       HorizontalAlignment="Center" TextAlignment="Center"
+                                       MaxWidth="440" Margin="0,4,0,0" Foreground="#5C6F66" />
+                            <StackPanel Orientation="Horizontal" Spacing="10"
+                                        HorizontalAlignment="Center" Margin="0,18,0,0">
+                                <Button Content="{loc:Loc Key=BuildCapture}" Classes="secondary"
+                                        Click="BuildCapture_Click" />
+                                <Button Content="{loc:Loc Key=ImportAccounts}"
+                                        Click="ImportAccount_Click" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+
+        <!-- ===== resizable console ===== -->
+        <GridSplitter Grid.Row="3" Height="10" HorizontalAlignment="Stretch"
+                      VerticalAlignment="Center" Background="Transparent" />
+
+        <Border Grid.Row="4" Background="{StaticResource ConsoleBackgroundBrush}"
+                BorderBrush="{StaticResource LineBrush}" BorderThickness="1"
+                CornerRadius="14" Padding="6" ClipToBounds="True"
+                FlowDirection="LeftToRight">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" Margin="8,4,4,6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Border Width="7" Height="7" CornerRadius="4"
+                            Background="{StaticResource AccentBrush}"
+                            BoxShadow="0 0 10 0 #592BE38B" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="1" Text="{loc:Loc Key=ConsoleTitle}"
+                               Foreground="{StaticResource InkBrush}" FontWeight="Bold"
+                               FontSize="11" LetterSpacing="1.3" Margin="9,0,0,0"
+                               VerticalAlignment="Center" />
+                    <TextBlock x:Name="ConsoleSummary" Grid.Column="2" Classes="caption"
+                               Margin="10,0,0,0" VerticalAlignment="Center" />
+                    <Button x:Name="ClearConsole" Grid.Column="3" Classes="ghost"
+                            Content="{loc:Loc Key=ClearConsole}" Click="ClearConsole_Click"
+                            ToolTip.Tip="{loc:Loc Key=ClearConsoleTip}" />
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <ListBox x:Name="ConsoleList" Classes="console">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate x:DataType="models:ConsoleEntry">
+                                <Grid ColumnDefinitions="Auto,Auto,*">
+                                    <TextBlock Text="{Binding Time}" Classes="mono"
+                                               Foreground="#5E8A73" />
+                                    <TextBlock Grid.Column="1" Text="{Binding Level}" Classes="mono level"
+                                               Margin="10,0"
+                                               Classes.info="{Binding IsInfo}"
+                                               Classes.success="{Binding IsSuccess}"
+                                               Classes.warn="{Binding IsWarn}"
+                                               Classes.error="{Binding IsError}" />
+                                    <SelectableTextBlock Grid.Column="2" Text="{Binding Message}"
+                                                       Classes="mono" TextWrapping="NoWrap"
+                                                       TextAlignment="Left"
+                                                       FlowDirection="{Binding IsRtl, Converter={x:Static loc:BoolToFlowDirectionConverter.Instance}}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <TextBlock x:Name="ConsoleEmptyHint" Text="{loc:Loc Key=ConsoleEmpty}"
+                               Classes="caption" IsVisible="False"
+                               HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Grid>
+            </Grid>
+        </Border>
+
+        <!-- ===== community ===== -->
+        <Border Grid.Row="5" Background="{StaticResource CardGradientBrush}"
+                BorderBrush="{StaticResource LineBrush}" BorderThickness="1"
+                CornerRadius="12" Padding="11,8" Margin="0,12,0,0">
+            <Grid ColumnDefinitions="Auto,Auto,Auto,Auto,*,Auto">
+                <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="7"
+                            VerticalAlignment="Center">
+                    <Border Width="3" Height="11" CornerRadius="2"
+                            Background="{StaticResource AccentBrush}" VerticalAlignment="Center" />
+                    <TextBlock Classes="groupTitle" Text="{loc:Loc Key=CommunityGroup}"
+                               VerticalAlignment="Center" />
+                </StackPanel>
+
+                <Border Grid.Column="1" Width="1" Margin="12,2"
+                        Background="{StaticResource LineBrush}" />
+
+                <Button Grid.Column="2" Classes="social telegram" Click="Telegram_Click"
+                        ToolTip.Tip="{loc:Loc Key=TelegramChannelTip}"
+                        AutomationProperties.Name="{loc:Loc Key=TelegramChannelTip}">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Border Classes="socialIcon telegram">
+                            <Path Data="M9.417 15.181l-.397 5.584c.568 0 .814-.244 1.109-.537l2.663-2.545 5.518 4.041c1.012.564 1.725.267 1.998-.931L23.93 3.821c.321-1.496-.541-2.081-1.527-1.714L1.114 10.291c-1.458.564-1.436 1.374-.248 1.741l5.443 1.693 12.723-8.006c.598-.354 1.136-.168.691.219L9.417 15.181z"
+                                  Fill="{StaticResource TelegramBrush}" Stretch="Uniform"
+                                  Width="15" Height="15" VerticalAlignment="Center" />
+                        </Border>
+                        <StackPanel VerticalAlignment="Center" Spacing="1">
+                            <TextBlock Classes="socialName telegramName" Text="{loc:Loc Key=TelegramChannel}" />
+                            <TextBlock Classes="socialPlatform" Text="{loc:Loc Key=TelegramPlatform}"
+                                       Foreground="{StaticResource TelegramBrush}" />
+                        </StackPanel>
+                        <TextBlock Classes="socialArrow" Text="→" />
+                    </StackPanel>
+                </Button>
+
+                <Button Grid.Column="3" Classes="social youtube" Margin="8,0,0,0"
+                        Click="YouTube_Click"
+                        ToolTip.Tip="{loc:Loc Key=YouTubeChannelTip}"
+                        AutomationProperties.Name="{loc:Loc Key=YouTubeChannelTip}">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Border Classes="socialIcon youtube">
+                            <Path Data="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                                  Fill="{StaticResource YouTubeBrush}" Stretch="Uniform"
+                                  Width="15" Height="15" VerticalAlignment="Center" />
+                        </Border>
+                        <StackPanel VerticalAlignment="Center" Spacing="1">
+                            <TextBlock Classes="socialName youtubeName" Text="{loc:Loc Key=YouTubeChannel}" />
+                            <TextBlock Classes="socialPlatform" Text="{loc:Loc Key=YouTubePlatform}"
+                                       Foreground="{StaticResource YouTubeBrush}" />
+                        </StackPanel>
+                        <TextBlock Classes="socialArrow" Text="→" />
+                    </StackPanel>
+                </Button>
+
+                <TextBlock Grid.Column="5" Classes="caption" VerticalAlignment="Center"
+                           Text="{loc:Loc Key=CommunityHint}" />
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

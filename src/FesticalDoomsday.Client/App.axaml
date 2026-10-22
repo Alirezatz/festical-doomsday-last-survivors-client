@@ -1,0 +1,569 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:Avalonia.Data.Converters;assembly=Avalonia.Base"
+             x:Class="FesticalDoomsday.Client.App"
+             RequestedThemeVariant="Dark">
+    <Application.Resources>
+        <!-- ===== palette ===== -->
+        <Color x:Key="Ink">#E9F4ED</Color>
+        <Color x:Key="Muted">#83998E</Color>
+        <Color x:Key="MutedStrong">#A9BDB3</Color>
+        <Color x:Key="Paper">#060B09</Color>
+        <Color x:Key="Card">#0F1915</Color>
+        <Color x:Key="Accent">#2BE38B</Color>
+        <Color x:Key="AccentHover">#47ED9E</Color>
+        <Color x:Key="AccentPressed">#1FC473</Color>
+        <Color x:Key="AccentText">#04150C</Color>
+        <Color x:Key="AccentLight">#11302A</Color>
+        <Color x:Key="AccentLightText">#74F2B8</Color>
+        <Color x:Key="Line">#1F2E28</Color>
+        <Color x:Key="LineStrong">#2C4038</Color>
+        <Color x:Key="Surface">#152320</Color>
+        <Color x:Key="SurfaceHover">#1C2E29</Color>
+        <Color x:Key="Field">#090F0D</Color>
+        <Color x:Key="FieldHover">#0B1412</Color>
+        <Color x:Key="Danger">#2C1715</Color>
+        <Color x:Key="DangerHover">#3A1D1A</Color>
+        <Color x:Key="DangerLine">#4E2723</Color>
+        <Color x:Key="DangerText">#FF9389</Color>
+        <Color x:Key="Warn">#E8B84B</Color>
+        <Color x:Key="WarnSoft">#272112</Color>
+        <Color x:Key="Info">#6BC0F7</Color>
+        <Color x:Key="ConsoleText">#A9DCBF</Color>
+        <Color x:Key="ConsoleBackground">#08120F</Color>
+        <Color x:Key="Telegram">#2AABEE</Color>
+        <Color x:Key="TelegramSoft">#0C202B</Color>
+        <Color x:Key="TelegramLine">#1B4358</Color>
+        <Color x:Key="TelegramIcon">#102E3E</Color>
+        <Color x:Key="YouTube">#FF3B57</Color>
+        <Color x:Key="YouTubeSoft">#280F17</Color>
+        <Color x:Key="YouTubeLine">#4A1E28</Color>
+        <Color x:Key="YouTubeIcon">#3A121C</Color>
+
+        <SolidColorBrush x:Key="InkBrush" Color="{StaticResource Ink}" />
+        <SolidColorBrush x:Key="MutedBrush" Color="{StaticResource Muted}" />
+        <SolidColorBrush x:Key="MutedStrongBrush" Color="{StaticResource MutedStrong}" />
+        <SolidColorBrush x:Key="PaperBrush" Color="{StaticResource Paper}" />
+        <SolidColorBrush x:Key="CardBrush" Color="{StaticResource Card}" />
+        <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource Accent}" />
+        <SolidColorBrush x:Key="AccentHoverBrush" Color="{StaticResource AccentHover}" />
+        <SolidColorBrush x:Key="AccentPressedBrush" Color="{StaticResource AccentPressed}" />
+        <SolidColorBrush x:Key="AccentTextBrush" Color="{StaticResource AccentText}" />
+        <SolidColorBrush x:Key="AccentLightBrush" Color="{StaticResource AccentLight}" />
+        <SolidColorBrush x:Key="AccentLightTextBrush" Color="{StaticResource AccentLightText}" />
+        <SolidColorBrush x:Key="LineBrush" Color="{StaticResource Line}" />
+        <SolidColorBrush x:Key="LineStrongBrush" Color="{StaticResource LineStrong}" />
+        <SolidColorBrush x:Key="SurfaceBrush" Color="{StaticResource Surface}" />
+        <SolidColorBrush x:Key="SurfaceHoverBrush" Color="{StaticResource SurfaceHover}" />
+        <SolidColorBrush x:Key="FieldBrush" Color="{StaticResource Field}" />
+        <SolidColorBrush x:Key="FieldHoverBrush" Color="{StaticResource FieldHover}" />
+        <SolidColorBrush x:Key="DangerBrush" Color="{StaticResource Danger}" />
+        <SolidColorBrush x:Key="DangerHoverBrush" Color="{StaticResource DangerHover}" />
+        <SolidColorBrush x:Key="DangerLineBrush" Color="{StaticResource DangerLine}" />
+        <SolidColorBrush x:Key="DangerTextBrush" Color="{StaticResource DangerText}" />
+        <SolidColorBrush x:Key="WarnBrush" Color="{StaticResource Warn}" />
+        <SolidColorBrush x:Key="WarnSoftBrush" Color="{StaticResource WarnSoft}" />
+        <SolidColorBrush x:Key="InfoBrush" Color="{StaticResource Info}" />
+        <SolidColorBrush x:Key="ConsoleTextBrush" Color="{StaticResource ConsoleText}" />
+        <SolidColorBrush x:Key="ConsoleBackgroundBrush" Color="{StaticResource ConsoleBackground}" />
+        <SolidColorBrush x:Key="TelegramBrush" Color="{StaticResource Telegram}" />
+        <SolidColorBrush x:Key="TelegramSoftBrush" Color="{StaticResource TelegramSoft}" />
+        <SolidColorBrush x:Key="TelegramLineBrush" Color="{StaticResource TelegramLine}" />
+        <SolidColorBrush x:Key="TelegramIconBrush" Color="{StaticResource TelegramIcon}" />
+        <SolidColorBrush x:Key="YouTubeBrush" Color="{StaticResource YouTube}" />
+        <SolidColorBrush x:Key="YouTubeSoftBrush" Color="{StaticResource YouTubeSoft}" />
+        <SolidColorBrush x:Key="YouTubeLineBrush" Color="{StaticResource YouTubeLine}" />
+        <SolidColorBrush x:Key="YouTubeIconBrush" Color="{StaticResource YouTubeIcon}" />
+
+        <!-- ===== surfaces ===== -->
+        <LinearGradientBrush x:Key="WindowBackgroundBrush" StartPoint="0%,0%" EndPoint="0%,100%">
+            <GradientStop Color="#0B1613" Offset="0" />
+            <GradientStop Color="#050A08" Offset="1" />
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="CardGradientBrush" StartPoint="0%,0%" EndPoint="0%,100%">
+            <GradientStop Color="#14211C" Offset="0" />
+            <GradientStop Color="#0C1512" Offset="1" />
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="AccentButtonBrush" StartPoint="0%,0%" EndPoint="0%,100%">
+            <GradientStop Color="#3AEDA0" Offset="0" />
+            <GradientStop Color="#20C878" Offset="1" />
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="AccentRuleBrush" StartPoint="0%,0%" EndPoint="100%,0%">
+            <GradientStop Color="#A62BE38B" Offset="0" />
+            <GradientStop Color="#1A2BE38B" Offset="0.35" />
+            <GradientStop Color="#002BE38B" Offset="1" />
+        </LinearGradientBrush>
+    </Application.Resources>
+
+    <Application.Styles>
+        <FluentTheme />
+
+        <!-- ===== base ===== -->
+        <Style Selector="Window">
+            <Setter Property="FontFamily" Value="Inter" />
+            <Setter Property="FontSize" Value="12" />
+        </Style>
+
+        <!-- ===== typography ===== -->
+        <Style Selector="TextBlock.brand">
+            <Setter Property="Foreground" Value="{StaticResource AccentBrush}" />
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="LetterSpacing" Value="1.6" />
+        </Style>
+        <Style Selector="TextBlock.title">
+            <Setter Property="Foreground" Value="{StaticResource InkBrush}" />
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <Style Selector="TextBlock.subtitle">
+            <Setter Property="Foreground" Value="{StaticResource MutedBrush}" />
+            <Setter Property="FontSize" Value="12.5" />
+        </Style>
+        <Style Selector="TextBlock.sectionTitle">
+            <Setter Property="Foreground" Value="{StaticResource InkBrush}" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <Style Selector="TextBlock.groupTitle">
+            <Setter Property="Foreground" Value="{StaticResource AccentBrush}" />
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="LetterSpacing" Value="0.6" />
+        </Style>
+        <Style Selector="TextBlock.label">
+            <Setter Property="Foreground" Value="{StaticResource MutedBrush}" />
+            <Setter Property="FontSize" Value="11" />
+        </Style>
+        <Style Selector="TextBlock.caption">
+            <Setter Property="Foreground" Value="{StaticResource MutedBrush}" />
+            <Setter Property="FontSize" Value="11" />
+        </Style>
+        <Style Selector="TextBlock.mono">
+            <Setter Property="FontFamily" Value="Cascadia Mono, Consolas, Menlo, DejaVu Sans Mono" />
+            <Setter Property="FontSize" Value="11.5" />
+        </Style>
+
+        <!-- ===== buttons ===== -->
+        <Style Selector="Button">
+            <Setter Property="Padding" Value="14,9" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Background" Value="{StaticResource AccentButtonBrush}" />
+            <Setter Property="Foreground" Value="{StaticResource AccentTextBrush}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border x:Name="Chrome"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="9"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter x:Name="PART_ContentPresenter"
+                                          Content="{TemplateBinding Content}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          RecognizesAccessKey="True" />
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+
+        <Style Selector="Button.secondary">
+            <Setter Property="Background" Value="{StaticResource SurfaceBrush}" />
+            <Setter Property="Foreground" Value="{StaticResource InkBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource LineStrongBrush}" />
+        </Style>
+        <Style Selector="Button.danger">
+            <Setter Property="Background" Value="{StaticResource DangerBrush}" />
+            <Setter Property="Foreground" Value="{StaticResource DangerTextBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource DangerLineBrush}" />
+        </Style>
+        <Style Selector="Button.ghost">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{StaticResource MutedBrush}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Padding" Value="8,5" />
+        </Style>
+        <Style Selector="Button.language">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{StaticResource MutedBrush}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Padding" Value="11,6" />
+            <Setter Property="FontSize" Value="11.5" />
+        </Style>
+        <Style Selector="Button.language.active">
+            <Setter Property="Background" Value="{StaticResource AccentLightBrush}" />
+            <Setter Property="Foreground" Value="{StaticResource AccentLightTextBrush}" />
+        </Style>
+
+        <Style Selector="Button:pointerover /template/ Border#Chrome">
+            <Setter Property="Opacity" Value="0.9" />
+        </Style>
+        <Style Selector="Button.secondary:pointerover /template/ Border#Chrome">
+            <Setter Property="Background" Value="{StaticResource SurfaceHoverBrush}" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+        <Style Selector="Button.danger:pointerover /template/ Border#Chrome">
+            <Setter Property="Background" Value="{StaticResource DangerHoverBrush}" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+        <Style Selector="Button.ghost:pointerover">
+            <Setter Property="Foreground" Value="{StaticResource InkBrush}" />
+        </Style>
+        <Style Selector="Button.ghost:pointerover /template/ Border#Chrome">
+            <Setter Property="Background" Value="{StaticResource SurfaceBrush}" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+        <Style Selector="Button:pressed /template/ Border#Chrome">
+            <Setter Property="Opacity" Value="0.75" />
+        </Style>
+        <Style Selector="Button:focus /template/ Border#Chrome">
+            <Setter Property="BoxShadow" Value="0 0 0 2 #592BE38B" />
+        </Style>
+
+        <!-- A disabled control is flat and quiet instead of a faded accent. -->
+        <Style Selector="Button:disabled /template/ Border#Chrome">
+            <Setter Property="Background" Value="{StaticResource SurfaceBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource LineBrush}" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+        <Style Selector="Button:disabled">
+            <Setter Property="Foreground" Value="{StaticResource MutedBrush}" />
+            <Setter Property="Cursor" Value="Arrow" />
+        </Style>
+
+        <!-- The Fluent theme paints its own background and text colour on the
+             content presenter of a button. Our template puts the chrome
+             around that presenter, so the theme would show up as a light box
+             right behind the label of the button. The presenter only carries
+             the label here, so it stays transparent and takes the colour of
+             the button. -->
+        <Style Selector="Button /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{TemplateBinding Foreground}" />
+        </Style>
+        <Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{TemplateBinding Foreground}" />
+        </Style>
+        <Style Selector="Button:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{TemplateBinding Foreground}" />
+        </Style>
+        <Style Selector="Button:disabled /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{TemplateBinding Foreground}" />
+        </Style>
+
+        <!-- ===== text inputs ===== -->
+        <Style Selector="TextBox">
+            <!-- The field is pinned to the button height so the inputs line up
+                 with the buttons; the text line still fits. -->
+            <Setter Property="Height" Value="36" />
+            <Setter Property="Padding" Value="11,0" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="BorderBrush" Value="{StaticResource LineStrongBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Background" Value="{StaticResource FieldBrush}" />
+            <Setter Property="Foreground" Value="{StaticResource InkBrush}" />
+            <Setter Property="CaretBrush" Value="{StaticResource AccentBrush}" />
+            <Setter Property="SelectionBrush" Value="{StaticResource AccentBrush}" />
+            <Setter Property="SelectionForegroundBrush" Value="{StaticResource AccentTextBrush}" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Cursor" Value="IBeam" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border x:Name="Chrome"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="8"
+                            Padding="{TemplateBinding Padding}">
+                        <Panel>
+                            <TextBlock x:Name="PART_Watermark"
+                                       Text="{TemplateBinding Watermark}"
+                                       Foreground="#5C6F66"
+                                       FontSize="{TemplateBinding FontSize}"
+                                       VerticalAlignment="Center"
+                                       IsVisible="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static converters:StringConverters.IsNullOrEmpty}}" />
+                            <ScrollViewer x:Name="PART_ContentHost"
+                                          Focusable="False"
+                                          VerticalAlignment="Center"
+                                          HorizontalScrollBarVisibility="Hidden"
+                                          VerticalScrollBarVisibility="Disabled">
+                                <!-- The text of the field lives in the presenter, so
+                                     it has to be bound to the text box both ways.
+                                     Without the binding the presenter keeps the
+                                     text it had and a deleted character stays
+                                     on the screen. -->
+                                <TextPresenter x:Name="PART_TextPresenter"
+                                              Text="{TemplateBinding Text, Mode=TwoWay}"
+                                              SelectionStart="{TemplateBinding SelectionStart}"
+                                              SelectionEnd="{TemplateBinding SelectionEnd}"
+                                              CaretBrush="{TemplateBinding CaretBrush}"
+                                              SelectionBrush="{TemplateBinding SelectionBrush}"
+                                              SelectionForegroundBrush="{TemplateBinding SelectionForegroundBrush}"
+                                              TextWrapping="{TemplateBinding TextWrapping}"
+                                              TextAlignment="{TemplateBinding TextAlignment}" />
+                            </ScrollViewer>
+                        </Panel>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        <Style Selector="TextBox:pointerover /template/ Border#Chrome">
+            <Setter Property="BorderBrush" Value="{StaticResource LineStrongBrush}" />
+            <Setter Property="Background" Value="{StaticResource FieldHoverBrush}" />
+        </Style>
+        <Style Selector="TextBox:focus /template/ Border#Chrome">
+            <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}" />
+            <Setter Property="BoxShadow" Value="0 0 0 2 #3D2BE38B" />
+        </Style>
+        <Style Selector="TextBox:disabled /template/ Border#Chrome">
+            <Setter Property="Opacity" Value="0.45" />
+        </Style>
+        <Style Selector="TextBox:disabled">
+            <Setter Property="Cursor" Value="Arrow" />
+        </Style>
+
+        <!-- ===== cards ===== -->
+        <Style Selector="Border.accountCard">
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="{StaticResource LineBrush}" />
+            <Setter Property="Background" Value="{StaticResource CardGradientBrush}" />
+        </Style>
+        <Style Selector="Border.accountCard:pointerover">
+            <Setter Property="BorderBrush" Value="{StaticResource LineStrongBrush}" />
+        </Style>
+        <Style Selector="Border.accountCard.connecting">
+            <Setter Property="BorderBrush" Value="{StaticResource WarnBrush}" />
+        </Style>
+        <Style Selector="Border.accountCard.connected">
+            <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}" />
+        </Style>
+
+        <Style Selector="Border.statusDot">
+            <Setter Property="Width" Value="8" />
+            <Setter Property="Height" Value="8" />
+            <Setter Property="CornerRadius" Value="4" />
+            <Setter Property="Background" Value="#39473F" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style Selector="Border.statusDot.connecting">
+            <Setter Property="Background" Value="{StaticResource WarnBrush}" />
+            <Setter Property="BoxShadow" Value="0 0 8 0 #66E8B84B" />
+        </Style>
+        <Style Selector="Border.statusDot.connected">
+            <Setter Property="Background" Value="{StaticResource AccentBrush}" />
+            <Setter Property="BoxShadow" Value="0 0 10 0 #592BE38B" />
+        </Style>
+
+        <!-- ===== status chips ===== -->
+        <Style Selector="Border.chip">
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="7,2" />
+            <Setter Property="Background" Value="#18231F" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style Selector="Border.chip TextBlock">
+            <Setter Property="FontSize" Value="9" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="LetterSpacing" Value="0.7" />
+            <Setter Property="Foreground" Value="{StaticResource MutedBrush}" />
+        </Style>
+        <Style Selector="Border.chip.connected">
+            <Setter Property="Background" Value="{StaticResource AccentLightBrush}" />
+        </Style>
+        <Style Selector="Border.chip.connected TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource AccentLightTextBrush}" />
+        </Style>
+        <Style Selector="Border.chip.connecting">
+            <Setter Property="Background" Value="{StaticResource WarnSoftBrush}" />
+        </Style>
+        <Style Selector="Border.chip.connecting TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource WarnBrush}" />
+        </Style>
+
+        <!-- ===== account card action ===== -->
+        <Style Selector="Button.connectButton">
+            <Setter Property="Background" Value="{StaticResource AccentButtonBrush}" />
+            <Setter Property="Foreground" Value="{StaticResource AccentTextBrush}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Padding" Value="10,7" />
+            <Setter Property="FontSize" Value="11.5" />
+        </Style>
+        <Style Selector="Button.connectButton.connected">
+            <Setter Property="Background" Value="{StaticResource DangerBrush}" />
+            <Setter Property="Foreground" Value="{StaticResource DangerTextBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource DangerLineBrush}" />
+        </Style>
+        <Style Selector="Button.connectButton.connecting">
+            <Setter Property="Background" Value="{StaticResource SurfaceBrush}" />
+            <Setter Property="Foreground" Value="{StaticResource MutedBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource LineBrush}" />
+            <Setter Property="IsEnabled" Value="False" />
+        </Style>
+
+        <!-- ===== social links ===== -->
+        <!-- The community bar carries the Telegram group and the YouTube
+             channel. Each one keeps the colour of its own platform, so the
+             two links stay apart even in the dark green window. -->
+        <Style Selector="Button.social">
+            <Setter Property="Background" Value="#0E1714" />
+            <Setter Property="Foreground" Value="{StaticResource InkBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource LineBrush}" />
+            <Setter Property="Padding" Value="9,6" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.15" />
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.15" />
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Button.social.telegram">
+            <Setter Property="Background" Value="{StaticResource TelegramSoftBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource TelegramLineBrush}" />
+        </Style>
+        <Style Selector="Button.social.youtube">
+            <Setter Property="Background" Value="{StaticResource YouTubeSoftBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource YouTubeLineBrush}" />
+        </Style>
+        <Style Selector="Button.social:pointerover /template/ Border#Chrome">
+            <Setter Property="Opacity" Value="1" />
+            <Setter Property="BorderBrush" Value="{StaticResource LineStrongBrush}" />
+        </Style>
+        <Style Selector="Button.social.telegram:pointerover /template/ Border#Chrome">
+            <Setter Property="BorderBrush" Value="{StaticResource TelegramBrush}" />
+            <Setter Property="BoxShadow" Value="0 0 0 1 #2E2AABEE, 0 6 18 -6 #7A2AABEE" />
+        </Style>
+        <Style Selector="Button.social.youtube:pointerover /template/ Border#Chrome">
+            <Setter Property="BorderBrush" Value="{StaticResource YouTubeBrush}" />
+            <Setter Property="BoxShadow" Value="0 0 0 1 #2EFF3B57, 0 6 18 -6 #7AFF3B57" />
+        </Style>
+        <Style Selector="Button.social:pressed /template/ Border#Chrome">
+            <Setter Property="Opacity" Value="0.85" />
+        </Style>
+
+        <Style Selector="Border.socialIcon">
+            <Setter Property="Width" Value="28" />
+            <Setter Property="Height" Value="28" />
+            <Setter Property="CornerRadius" Value="9" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Background" Value="#16231F" />
+        </Style>
+        <Style Selector="Border.socialIcon.telegram">
+            <Setter Property="Background" Value="{StaticResource TelegramIconBrush}" />
+        </Style>
+        <Style Selector="Border.socialIcon.youtube">
+            <Setter Property="Background" Value="{StaticResource YouTubeIconBrush}" />
+        </Style>
+
+        <Style Selector="TextBlock.socialName">
+            <Setter Property="FontSize" Value="11.5" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="{StaticResource InkBrush}" />
+        </Style>
+        <!-- The name of a link takes the colour of its own platform while the
+             pointer rests on the button. The last part of a selector decides
+             how specific a rule is, so the hover rule needs a second class on
+             the text to beat the rule above it. -->
+        <Style Selector="Button.social.telegram:pointerover TextBlock.socialName.telegramName">
+            <Setter Property="Foreground" Value="{StaticResource TelegramBrush}" />
+        </Style>
+        <Style Selector="Button.social.youtube:pointerover TextBlock.socialName.youtubeName">
+            <Setter Property="Foreground" Value="{StaticResource YouTubeBrush}" />
+        </Style>
+        <Style Selector="TextBlock.socialPlatform">
+            <Setter Property="FontSize" Value="8" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="LetterSpacing" Value="1" />
+        </Style>
+        <Style Selector="TextBlock.socialArrow">
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="Foreground" Value="{StaticResource MutedStrongBrush}" />
+            <Setter Property="Opacity" Value="0" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.16" />
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Button.social:pointerover TextBlock.socialArrow">
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+
+        <!-- ===== console ===== -->
+        <Style Selector="TextBlock.level">
+            <Setter Property="FontFamily" Value="Cascadia Mono, Consolas, Menlo, DejaVu Sans Mono" />
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="{StaticResource InfoBrush}" />
+        </Style>
+        <Style Selector="TextBlock.level.info">
+            <Setter Property="Foreground" Value="{StaticResource InfoBrush}" />
+        </Style>
+        <Style Selector="TextBlock.level.success">
+            <Setter Property="Foreground" Value="{StaticResource AccentBrush}" />
+        </Style>
+        <Style Selector="TextBlock.level.warn">
+            <Setter Property="Foreground" Value="{StaticResource WarnBrush}" />
+        </Style>
+        <Style Selector="TextBlock.level.error">
+            <Setter Property="Foreground" Value="{StaticResource DangerTextBrush}" />
+        </Style>
+        <Style Selector="ListBox.console">
+            <Setter Property="Background" Value="{StaticResource ConsoleBackgroundBrush}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+        </Style>
+        <Style Selector="ListBox.console ListBoxItem">
+            <Setter Property="Padding" Value="10,2" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        </Style>
+
+        <!-- ===== scrollbars ===== -->
+        <Style Selector="ScrollBar:vertical">
+            <Setter Property="Width" Value="10" />
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+        <Style Selector="ScrollBar:horizontal">
+            <Setter Property="Height" Value="10" />
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+        <Style Selector="ScrollBar:vertical /template/ Thumb">
+            <Setter Property="Background" Value="#33A9DCBF" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border Background="{TemplateBinding Background}"
+                            CornerRadius="3"
+                            Margin="3,2" />
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        <Style Selector="ScrollBar:horizontal /template/ Thumb">
+            <Setter Property="Background" Value="#33A9DCBF" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border Background="{TemplateBinding Background}"
+                            CornerRadius="3"
+                            Margin="2,3" />
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        <Style Selector="ScrollBar:pointerover /template/ Thumb">
+            <Setter Property="Background" Value="#59A9DCBF" />
+        </Style>
+    </Application.Styles>
+</Application>

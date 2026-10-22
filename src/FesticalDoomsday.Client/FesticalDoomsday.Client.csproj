@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <InvariantGlobalization>false</InvariantGlobalization>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AssemblyName>FesticalDoomsdayClient</AssemblyName>
+    <RootNamespace>FesticalDoomsday.Client</RootNamespace>
+    <Product>Festical Doomsday Last Survivors Client</Product>
+    <Title>Festical Doomsday Last Survivors Client</Title>
+    <Description>Multi-account manager for the Doomsday: Last Survivors game servers.</Description>
+    <Authors>Festical Doomsday Last Survivors Client contributors</Authors>
+    <RepositoryType>git</RepositoryType>
+    <Copyright>Copyright (c) Festical Doomsday Last Survivors Client contributors</Copyright>
+    <ApplicationIcon>Assets\ICON.ico</ApplicationIcon>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\**" />
+    <EmbeddedResource Include="Assets\edge_servers.json" LogicalName="edge_servers.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.3.22" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.3.22" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.22" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.22" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(Configuration)' == 'Debug'">
+    <PackageReference Include="Avalonia.Diagnostics" Version="11.3.22" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="FesticalDoomsday.Client.Tests" />
+  </ItemGroup>
+
+</Project>

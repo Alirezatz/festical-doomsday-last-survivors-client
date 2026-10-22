@@ -1,0 +1,25 @@
+# Build output
+bin/
+obj/
+publish/
+artifacts/
+
+# IDE
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.userprefs
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Secrets: account files hold live login credentials
+*.json
+!src/FesticalDoomsday.Client/Assets/edge_servers.json
+!src/FesticalDoomsday.Client/Assets/*.csproj
+accounts.json
+captured_f3.json
