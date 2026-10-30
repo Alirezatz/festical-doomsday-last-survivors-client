@@ -1,0 +1,37 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:loc="clr-namespace:FesticalDoomsday.Client.Services;assembly=FesticalDoomsdayClient"
+        x:Class="FesticalDoomsday.Client.Views.ConfirmDialog"
+        Width="460" SizeToContent="Height"
+        CanResize="False"
+        ShowInTaskbar="False"
+        FontFamily="Inter"
+        WindowStartupLocation="CenterOwner"
+        Background="{StaticResource WindowBackgroundBrush}"
+        Foreground="{StaticResource InkBrush}">
+    <Border Margin="22" Background="{StaticResource CardGradientBrush}"
+            BorderBrush="{StaticResource LineBrush}" BorderThickness="1" CornerRadius="14">
+        <StackPanel Margin="22" Spacing="16">
+            <Grid ColumnDefinitions="Auto,*">
+                <Border x:Name="IconBadge" Width="34" Height="34" CornerRadius="10"
+                        Background="{StaticResource AccentLightBrush}" VerticalAlignment="Top">
+                    <TextBlock x:Name="IconGlyph" Text="!" FontSize="16" FontWeight="Bold"
+                               Foreground="{StaticResource AccentLightTextBrush}"
+                               HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Border>
+                <StackPanel Grid.Column="1" Spacing="4" Margin="12,0,0,0">
+                    <TextBlock x:Name="MessageTitle" FontSize="14" FontWeight="Bold"
+                               Foreground="{StaticResource InkBrush}" TextWrapping="Wrap" />
+                    <TextBlock x:Name="MessageText" TextWrapping="Wrap" FontSize="12"
+                               Foreground="{StaticResource MutedStrongBrush}" LineHeight="18" />
+                </StackPanel>
+            </Grid>
+            <Border Height="1" Background="{StaticResource AccentRuleBrush}" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10">
+                <Button x:Name="CancelButton" Content="{loc:Loc Key=DialogCancel}" MinWidth="96"
+                        Classes="secondary" />
+                <Button x:Name="ConfirmButton" Content="{loc:Loc Key=DialogConfirm}" MinWidth="96" />
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</Window>

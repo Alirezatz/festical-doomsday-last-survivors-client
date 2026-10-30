@@ -1,0 +1,252 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:models="clr-namespace:FesticalDoomsday.Client.Models;assembly=FesticalDoomsdayClient"
+        xmlns:loc="clr-namespace:FesticalDoomsday.Client.Services;assembly=FesticalDoomsdayClient"
+        x:Class="FesticalDoomsday.Client.Views.TransportWindow"
+        x:DataType="models:AccountSession"
+        Title="{loc:Loc Key=TransportTitle}"
+        Width="600" Height="870"
+        MinWidth="520" MinHeight="600"
+        SystemDecorations="None"
+        TransparencyLevelHint="Transparent"
+        Background="Transparent"
+        Foreground="{StaticResource InkBrush}"
+        FontFamily="Inter"
+        WindowStartupLocation="CenterOwner">
+    <!-- The form is one rounded card: with no window border, these corners are
+         the shape of the window itself. -->
+    <Border CornerRadius="16" ClipToBounds="True"
+            Background="{StaticResource WindowBackgroundBrush}">
+    <Grid Margin="20" RowDefinitions="Auto,14,*,12,Auto">
+
+        <!-- ===== header ===== -->
+        <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto" VerticalAlignment="Center">
+            <Border Width="50" Height="50" CornerRadius="15"
+                    Background="{StaticResource AccentLightBrush}"
+                    BorderBrush="{StaticResource LineStrongBrush}" BorderThickness="1">
+                <TextBlock Text="⇄" FontSize="24" FontWeight="Bold"
+                           Foreground="{StaticResource AccentLightTextBrush}"
+                           HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Border>
+            <StackPanel Grid.Column="1" Margin="14,0,10,0" VerticalAlignment="Center">
+                <TextBlock Text="{loc:Loc Key=TransportTitle}" FontSize="20" FontWeight="Bold"
+                           Foreground="{StaticResource InkBrush}" />
+                <TextBlock Text="{Binding PlayerNameText}" Classes="caption" Margin="0,2,0,0"
+                           FontSize="12" TextTrimming="CharacterEllipsis" />
+            </StackPanel>
+            <Button Grid.Column="2" Classes="ghost" Content="✕" Width="30" Height="30" Padding="0"
+                    FontSize="12" Click="Close_Click"
+                    AutomationProperties.Name="{loc:Loc Key=CloseWindow}"
+                    ToolTip.Tip="{loc:Loc Key=CloseWindow}" />
+        </Grid>
+
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <StackPanel Spacing="14">
+
+                <!-- ===== the account has no Trading Post ===== -->
+                <Border x:Name="NoBuildingBanner" IsVisible="False"
+                        Background="{StaticResource DangerBrush}"
+                        BorderBrush="{StaticResource DangerLineBrush}" BorderThickness="1"
+                        CornerRadius="12" Padding="14,11">
+                    <StackPanel Spacing="3">
+                        <TextBlock Text="{loc:Loc Key=TransportNoBuildingBanner}"
+                                   Foreground="{StaticResource DangerTextBrush}"
+                                   FontWeight="SemiBold" TextWrapping="Wrap" FontSize="12.5" />
+                        <TextBlock x:Name="NoBuildingDetail" Classes="caption" TextWrapping="Wrap"
+                                   Foreground="{StaticResource DangerTextBrush}" FontSize="11.5" />
+                    </StackPanel>
+                </Border>
+
+                <!-- ===== the Trading Post of this account ===== -->
+                <Border Background="{StaticResource CardGradientBrush}"
+                        BorderBrush="{StaticResource LineBrush}" BorderThickness="1"
+                        CornerRadius="14" Padding="16,14">
+                    <StackPanel Spacing="12">
+                        <Grid ColumnDefinitions="Auto,*,Auto">
+                            <TextBlock Classes="groupTitle" Text="{loc:Loc Key=TransportLimits}"
+                                       VerticalAlignment="Center" />
+                            <Border Grid.Column="2" Classes="chip">
+                                <TextBlock x:Name="LevelText" Text="—" />
+                            </Border>
+                        </Grid>
+                        <Grid ColumnDefinitions="*,10,*,10,*,10,*">
+                            <StackPanel Spacing="3">
+                                <TextBlock Classes="resLabel" Text="{loc:Loc Key=TransportPerSend}" />
+                                <TextBlock x:Name="PerSendValue" Classes="metricValue" Text="—" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="2" Spacing="3">
+                                <TextBlock Classes="resLabel" Text="{loc:Loc Key=TransportDailySupply}" />
+                                <TextBlock x:Name="DailySupplyValue" Classes="metricValue" Text="—" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="4" Spacing="3">
+                                <TextBlock Classes="resLabel" Text="{loc:Loc Key=TransportTaxRate}" />
+                                <TextBlock x:Name="TaxRateValue" Classes="metricValue" Text="—" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="6" Spacing="3">
+                                <TextBlock Classes="resLabel" Text="{loc:Loc Key=TransportSpeed}" />
+                                <TextBlock x:Name="SpeedValue" Classes="metricValue" Text="—" />
+                            </StackPanel>
+                        </Grid>
+                        <StackPanel Spacing="5">
+                            <TextBlock x:Name="SupplyUsedText" Classes="caption" />
+                            <ProgressBar x:Name="SupplyBar" Height="6" Minimum="0" Maximum="1" Value="0"
+                                         Foreground="{StaticResource AccentBrush}"
+                                         Background="{StaticResource SurfaceBrush}" />
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- ===== who receives it ===== -->
+                <Border Background="{StaticResource CardGradientBrush}"
+                        BorderBrush="{StaticResource LineBrush}" BorderThickness="1"
+                        CornerRadius="14" Padding="16,14">
+                    <StackPanel Spacing="10">
+                        <TextBlock Classes="groupTitle" Text="{loc:Loc Key=TransportReceiver}" />
+                        <Grid ColumnDefinitions="*,8,Auto">
+                            <TextBox x:Name="TargetBox"
+                                     Watermark="{loc:Loc Key=TransportReceiverId}"
+                                     VerticalAlignment="Center" />
+                            <Button Grid.Column="2" x:Name="CheckButton" Classes="secondary"
+                                    Content="{loc:Loc Key=TransportCheck}"
+                                    Click="Check_Click" />
+                        </Grid>
+                        <TextBlock x:Name="TargetStatus" Classes="caption" TextWrapping="Wrap" />
+                        <ProgressBar x:Name="TargetBar" Height="6" Minimum="0" Maximum="1" Value="0"
+                                     Foreground="{StaticResource InfoBrush}"
+                                     Background="{StaticResource SurfaceBrush}" />
+                    </StackPanel>
+                </Border>
+
+                <!-- ===== what is sent ===== -->                        <Border Background="{StaticResource CardGradientBrush}"
+                        BorderBrush="{StaticResource LineBrush}" BorderThickness="1"
+                        CornerRadius="14" Padding="16,14">
+                    <StackPanel Spacing="12">
+                        <TextBlock Classes="groupTitle" Text="{loc:Loc Key=TransportResource}" />
+                        <Grid ColumnDefinitions="*,8,*,8,*,8,*">
+                            <ToggleButton x:Name="FoodPick" Grid.Column="0" Classes="resPick" Tag="3"
+                                          Click="Resource_Click">
+                                <StackPanel Spacing="4" HorizontalAlignment="Center">
+                                    <Image Width="26" Height="26" Stretch="Uniform"
+                                           RenderOptions.BitmapInterpolationMode="HighQuality"
+                                           Source="avares://FesticalDoomsdayClient/Assets/Food.png" />
+                                    <TextBlock Text="{loc:Loc Key=FoodLabel}" Classes="resLabel"
+                                               HorizontalAlignment="Center" />
+                                    <TextBlock x:Name="FoodValue" Classes="bagTileValue" FontSize="12.5"
+                                               HorizontalAlignment="Center" Text="—" />
+                                </StackPanel>
+                            </ToggleButton>
+                            <ToggleButton x:Name="WoodPick" Grid.Column="2" Classes="resPick" Tag="4"
+                                          Click="Resource_Click">
+                                <StackPanel Spacing="4" HorizontalAlignment="Center">
+                                    <Image Width="26" Height="26" Stretch="Uniform"
+                                           RenderOptions.BitmapInterpolationMode="HighQuality"
+                                           Source="avares://FesticalDoomsdayClient/Assets/Wood.png" />
+                                    <TextBlock Text="{loc:Loc Key=WoodLabel}" Classes="resLabel"
+                                               HorizontalAlignment="Center" />
+                                    <TextBlock x:Name="WoodValue" Classes="bagTileValue" FontSize="12.5"
+                                               HorizontalAlignment="Center" Text="—" />
+                                </StackPanel>
+                            </ToggleButton>
+                            <ToggleButton x:Name="SteelPick" Grid.Column="4" Classes="resPick" Tag="5"
+                                          Click="Resource_Click">
+                                <StackPanel Spacing="4" HorizontalAlignment="Center">
+                                    <Image Width="26" Height="26" Stretch="Uniform"
+                                           RenderOptions.BitmapInterpolationMode="HighQuality"
+                                           Source="avares://FesticalDoomsdayClient/Assets/Steel.png" />
+                                    <TextBlock Text="{loc:Loc Key=SteelLabel}" Classes="resLabel"
+                                               HorizontalAlignment="Center" />
+                                    <TextBlock x:Name="SteelValue" Classes="bagTileValue" FontSize="12.5"
+                                               HorizontalAlignment="Center" Text="—" />
+                                </StackPanel>
+                            </ToggleButton>
+                            <ToggleButton x:Name="OilPick" Grid.Column="6" Classes="resPick" Tag="2"
+                                          Click="Resource_Click">
+                                <StackPanel Spacing="4" HorizontalAlignment="Center">
+                                    <Image Width="26" Height="26" Stretch="Uniform"
+                                           RenderOptions.BitmapInterpolationMode="HighQuality"
+                                           Source="avares://FesticalDoomsdayClient/Assets/Oil.png" />
+                                    <TextBlock Text="{loc:Loc Key=OilLabel}" Classes="resLabel"
+                                               HorizontalAlignment="Center" />
+                                    <TextBlock x:Name="OilValue" Classes="bagTileValue" FontSize="12.5"
+                                               HorizontalAlignment="Center" Text="—" />
+                                </StackPanel>
+                            </ToggleButton>
+                        </Grid>
+
+                        <Border Height="1" Background="{StaticResource LineBrush}" />
+
+                        <Grid ColumnDefinitions="*,Auto">
+                            <TextBlock Classes="groupTitle" Text="{loc:Loc Key=TransportAmount}"
+                                       VerticalAlignment="Center" />
+                            <TextBlock Grid.Column="1" x:Name="PerSendText" Classes="caption"
+                                       VerticalAlignment="Center" />
+                        </Grid>
+                        <Grid ColumnDefinitions="*,Auto">
+                            <TextBlock x:Name="AvailableText" Classes="caption" VerticalAlignment="Center" />
+                            <TextBlock Grid.Column="1" x:Name="MaxText" Classes="caption"
+                                       Foreground="{StaticResource AccentLightTextBrush}"
+                                       FontFamily="Cascadia Mono, Consolas, Menlo, DejaVu Sans Mono"
+                                       FontSize="12.5" VerticalAlignment="Center" />
+                        </Grid>
+                        <Slider x:Name="AmountSlider" Classes="amount" Minimum="0" Maximum="0"
+                                ValueChanged="AmountSlider_ValueChanged" />
+                        <Grid ColumnDefinitions="*,8,*,8,*">
+                            <Button Grid.Column="0" Classes="secondary" Content="25%" Click="Quarter_Click"
+                                    Padding="8,6" FontSize="11.5" />
+                            <Button Grid.Column="2" Classes="secondary" Content="50%" Click="Half_Click"
+                                    Padding="8,6" FontSize="11.5" />
+                            <Button Grid.Column="4" Classes="secondary" Content="{loc:Loc Key=TransportMax}"
+                                    Click="Max_Click" Padding="8,6" FontSize="11.5" />
+                        </Grid>
+                        <TextBox x:Name="AmountBox" TextChanged="AmountBox_TextChanged"
+                                 FontFamily="Cascadia Mono, Consolas, Menlo, DejaVu Sans Mono"
+                                 VerticalContentAlignment="Center" />
+                        <Border Background="{StaticResource SurfaceBrush}"
+                                BorderBrush="{StaticResource LineBrush}" BorderThickness="1"
+                                CornerRadius="10" Padding="12,9">
+                            <StackPanel Spacing="2">
+                                <TextBlock x:Name="TaxText" Classes="caption" FontSize="11.5" />
+                                <TextBlock x:Name="ReceiveText" Classes="caption" FontSize="11.5" />
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- ===== the castles the session already knows ===== -->
+                <Border Background="{StaticResource CardGradientBrush}"
+                        BorderBrush="{StaticResource LineBrush}" BorderThickness="1"
+                        CornerRadius="14" Padding="16,14">
+                    <StackPanel Spacing="8">
+                        <TextBlock Classes="groupTitle" Text="{loc:Loc Key=TransportNearby}" />
+                        <TextBlock Classes="caption" Text="{loc:Loc Key=TransportNearbyHint}" FontSize="11" />
+                        <ListBox x:Name="TargetList" MaxHeight="150" Background="Transparent"
+                                 BorderThickness="0" SelectionChanged="TargetList_SelectionChanged">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate x:DataType="models:TransportTarget">
+                                    <TextBlock Text="{Binding Line}" FontSize="12.5"
+                                               TextTrimming="CharacterEllipsis" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <TextBlock x:Name="NearbyEmpty" Classes="caption" TextWrapping="Wrap" FontSize="11.5"
+                                   Text="{loc:Loc Key=TransportNoNearby}" />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- ===== send: always in reach, under the scrolling cards ===== -->
+        <Border Grid.Row="4" Background="{StaticResource CardGradientBrush}"
+                BorderBrush="{StaticResource LineBrush}" BorderThickness="1"
+                CornerRadius="14" Padding="14,11">
+            <Grid ColumnDefinitions="*,10,Auto">
+                <TextBlock x:Name="StatusText" VerticalAlignment="Center" TextWrapping="Wrap"
+                           FontSize="12" Foreground="{StaticResource MutedStrongBrush}" />
+                <Button Grid.Column="2" x:Name="SendButton" Content="{loc:Loc Key=TransportSend}"
+                        MinWidth="150" Click="Send_Click" IsEnabled="False"
+                        AutomationProperties.Name="{loc:Loc Key=TransportSend}" />
+            </Grid>
+        </Border>
+    </Grid>
+    </Border>
+</Window>

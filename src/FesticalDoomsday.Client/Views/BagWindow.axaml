@@ -1,0 +1,162 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:models="clr-namespace:FesticalDoomsday.Client.Models;assembly=FesticalDoomsdayClient"
+        xmlns:loc="clr-namespace:FesticalDoomsday.Client.Services;assembly=FesticalDoomsdayClient"
+        x:Class="FesticalDoomsday.Client.Views.BagWindow"
+        x:DataType="models:AccountSession"
+        Title="{loc:Loc Key=BagWindowTitle}"
+        Width="680" Height="640"
+        MinWidth="560" MinHeight="480"
+        SystemDecorations="None"
+        TransparencyLevelHint="Transparent"
+        Background="Transparent"
+        Foreground="{StaticResource InkBrush}"
+        FontFamily="Inter"
+        WindowStartupLocation="CenterOwner">
+    <!-- The form is one rounded card: with no window border, these corners are
+         the shape of the window itself. -->
+    <Border CornerRadius="16" ClipToBounds="True"
+            Background="{StaticResource WindowBackgroundBrush}">
+    <Grid Margin="20" RowDefinitions="Auto,16,Auto,18,Auto,10,*,Auto">
+
+        <!-- ===== header ===== -->
+        <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto" VerticalAlignment="Center">
+            <Border Width="50" Height="50" CornerRadius="15"
+                    Background="{StaticResource AccentLightBrush}"
+                    BorderBrush="{StaticResource LineStrongBrush}" BorderThickness="1">
+                <Image Width="30" Height="34" Stretch="Uniform"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                       RenderOptions.BitmapInterpolationMode="HighQuality"
+                       Source="avares://FesticalDoomsdayClient/Assets/Backpack.png" />
+            </Border>
+            <StackPanel Grid.Column="1" Margin="14,0,10,0" VerticalAlignment="Center">
+                <TextBlock Text="{loc:Loc Key=BagWindowTitle}" FontSize="20" FontWeight="Bold"
+                           Foreground="{StaticResource InkBrush}" />
+                <TextBlock Text="{Binding PlayerNameText}" Classes="caption" Margin="0,2,0,0"
+                           FontSize="12" TextTrimming="CharacterEllipsis" />
+            </StackPanel>
+            <Button Grid.Column="2" Classes="ghost" Content="✕" Width="30" Height="30" Padding="0"
+                    FontSize="12" Click="Close_Click"
+                    AutomationProperties.Name="{loc:Loc Key=CloseWindow}"
+                    ToolTip.Tip="{loc:Loc Key=CloseWindow}" />
+        </Grid>
+
+        <!-- ===== what the bag is worth per resource ===== -->
+        <Border Grid.Row="2" Background="{StaticResource CardGradientBrush}"
+                BorderBrush="{StaticResource LineBrush}" BorderThickness="1"
+                CornerRadius="14" Padding="14,12">
+            <Grid ColumnDefinitions="*,10,*,10,*,10,*">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Image Width="22" Height="22" Stretch="Uniform"
+                               RenderOptions.BitmapInterpolationMode="HighQuality"
+                               Source="avares://FesticalDoomsdayClient/Assets/Food.png" />
+                        <TextBlock Classes="bagTileLabel" Text="{loc:Loc Key=FoodLabel}"
+                                   VerticalAlignment="Center" />
+                    </StackPanel>
+                    <TextBlock Classes="bagTileValue" FontSize="17" Text="{Binding BagFoodText}"
+                               Margin="0,5,0,0" />
+                </StackPanel>
+                <StackPanel Grid.Column="2">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Image Width="22" Height="22" Stretch="Uniform"
+                               RenderOptions.BitmapInterpolationMode="HighQuality"
+                               Source="avares://FesticalDoomsdayClient/Assets/Wood.png" />
+                        <TextBlock Classes="bagTileLabel" Text="{loc:Loc Key=WoodLabel}"
+                                   VerticalAlignment="Center" />
+                    </StackPanel>
+                    <TextBlock Classes="bagTileValue" FontSize="17" Text="{Binding BagWoodText}"
+                               Margin="0,5,0,0" />
+                </StackPanel>
+                <StackPanel Grid.Column="4">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Image Width="22" Height="22" Stretch="Uniform"
+                               RenderOptions.BitmapInterpolationMode="HighQuality"
+                               Source="avares://FesticalDoomsdayClient/Assets/Steel.png" />
+                        <TextBlock Classes="bagTileLabel" Text="{loc:Loc Key=SteelLabel}"
+                                   VerticalAlignment="Center" />
+                    </StackPanel>
+                    <TextBlock Classes="bagTileValue" FontSize="17" Text="{Binding BagSteelText}"
+                               Margin="0,5,0,0" />
+                </StackPanel>
+                <StackPanel Grid.Column="6">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Image Width="22" Height="22" Stretch="Uniform"
+                               RenderOptions.BitmapInterpolationMode="HighQuality"
+                               Source="avares://FesticalDoomsdayClient/Assets/Oil.png" />
+                        <TextBlock Classes="bagTileLabel" Text="{loc:Loc Key=OilLabel}"
+                                   VerticalAlignment="Center" />
+                    </StackPanel>
+                    <TextBlock Classes="bagTileValue" FontSize="17" Text="{Binding BagOilText}"
+                               Margin="0,5,0,0" />
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- ===== the stacks of the real bag ===== -->
+        <Grid Grid.Row="4" ColumnDefinitions="Auto,*,Auto">
+            <TextBlock Classes="groupTitle" Text="{loc:Loc Key=BagWindowStacks}"
+                       VerticalAlignment="Center" />
+            <TextBlock Grid.Column="2" Classes="caption" Text="{Binding BagStacksSummaryText}"
+                       VerticalAlignment="Center" />
+        </Grid>
+
+        <Grid Grid.Row="6">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <ItemsControl ItemsSource="{Binding BagStacks}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="models:BagStack">
+                            <Border Classes="bagTile" Margin="0,0,0,8" Padding="13,10">
+                                <Grid ColumnDefinitions="Auto,*,Auto,Auto">
+                                    <Image Width="28" Height="28" Stretch="Uniform" VerticalAlignment="Center"
+                                           RenderOptions.BitmapInterpolationMode="HighQuality"
+                                           Source="{Binding Icon}" />
+                                    <StackPanel Grid.Column="1" Margin="11,0,10,0" VerticalAlignment="Center"
+                                                Spacing="2">
+                                        <TextBlock Text="{Binding Name}" FontSize="13.5" FontWeight="Bold"
+                                                   Foreground="{StaticResource InkBrush}"
+                                                   TextTrimming="CharacterEllipsis" />
+                                        <StackPanel Orientation="Horizontal" Spacing="7">
+                                            <TextBlock Text="{Binding CountText}" Classes="caption"
+                                                       FontSize="11.5" VerticalAlignment="Center" />
+                                            <TextBlock Text="·" Classes="caption" VerticalAlignment="Center" />
+                                            <TextBlock Text="{Binding TotalText}" Classes="metricValue"
+                                                       FontSize="12" VerticalAlignment="Center" />
+                                            <TextBlock Text="{Binding ResourceLabel}" Classes="resLabel"
+                                                       FontSize="9.5" VerticalAlignment="Center" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <Button Grid.Column="2" Classes="secondary" Tag="{Binding}"
+                                            Content="{loc:Loc Key=BagUse}"
+                                            Padding="13,6" FontSize="11.5"
+                                            Click="Use_Click"
+                                            ToolTip.Tip="{loc:Loc Key=BagUseTip}" />
+                                    <Button Grid.Column="3" Classes="ghost" Tag="{Binding}"
+                                            Content="{loc:Loc Key=BagUseAll}" Margin="4,0,0,0"
+                                            IsVisible="{Binding CanUseAll}"
+                                            Padding="10,6" FontSize="11"
+                                            Click="UseAll_Click"
+                                            ToolTip.Tip="{loc:Loc Key=BagUseAllTip}" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+
+            <TextBlock Text="{loc:Loc Key=BagConnectHint}"
+                       IsVisible="{Binding !IsConnected}"
+                       Classes="caption"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                       TextWrapping="Wrap" TextAlignment="Center" MaxWidth="380" />
+        </Grid>
+
+        <!-- ===== footer ===== -->
+        <Border Grid.Row="7" Background="{StaticResource CardGradientBrush}"
+                BorderBrush="{StaticResource LineBrush}" BorderThickness="1"
+                CornerRadius="12" Padding="14,10" Margin="0,12,0,0">
+            <TextBlock Classes="caption" Text="{loc:Loc Key=BagUseHint}" TextWrapping="Wrap" />
+        </Border>
+    </Grid>
+    </Border>
+</Window>
